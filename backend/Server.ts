@@ -10,8 +10,8 @@ import { getUserById } from './schema/User/Queries/GetUserById';
 import { userResolver } from './resolvers/User/UserResolver';
 const schema: GraphQLSchema = buildSchema(rawSchema);
 
-export const LOCALHOST = 'https://localhost';
-export const PORT = 3000;
+export const LOCALHOST = 'http://localhost';
+export const PORT = 3001;
 
 const app = express();
 app.use(cors());
