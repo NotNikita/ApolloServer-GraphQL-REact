@@ -60,7 +60,7 @@ const FormAvatarWrapper = styled.div`
 function App() {
   const [user, setUser] = useState<User | undefined>(undefined);
   const [page, setPage] = useState<string>("");
-  const [avatarResponse, setAvatarResponse] = useState<string[]>(['https://placekitten.com/300/300']);
+  const avatarPlaceholder = 'https://placekitten.com/300/300';
   const [currentTab, setCurrentTab] = useState<TabStatus>(TabStatus.LEFT);
 
 
@@ -84,11 +84,9 @@ function App() {
                   onClick={(e) => {
                     e.preventDefault();
                     userStore.getUserByPage(page).then((users) => {
-                        users && users?.forEach(({avatar}) => {
-                          if (avatar) {
-                            setAvatarResponse([...avatarResponse, avatar]);
-                          }
-                        })
+                      if (users) {
+                        setUser(users[0]);
+                      }
                       }
                     );
                   }}
@@ -122,13 +120,6 @@ function App() {
                   setUser({ ...user, email: event.target.value } as User)
                 }
               />
-              <input
-                type="text"
-                placeholder="Avatar"
-                onChange={(event) =>
-                  setUser({ ...user, avatar: event.target.value } as User)
-                }
-              />
               <div>
                 <StyledButton
                   onClick={(e) => {
@@ -139,7 +130,7 @@ function App() {
                     }
                     userStore.createUser(user).then((r) => {
                       console.log(r);
-                      setAvatarResponse(r.avatar)
+                      setUser(r)
                     });
                   }}
 
@@ -151,7 +142,7 @@ function App() {
             </form>
           )}
         </FormContainer>
-        {avatarResponse && avatarResponse.map(a => <LazyLoadImage src={a} alt="avatar" />)}
+        <LazyLoadImage src={avatarPlaceholder} alt="avatar" />
       </FormAvatarWrapper>
 
     </AppContainer>

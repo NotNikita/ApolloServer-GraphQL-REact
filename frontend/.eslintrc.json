@@ -54,18 +54,6 @@
     "simple-import-sort/imports": "error",
     "sort-imports": "off"
   },
-  "overrides": [
-    {
-      "files": ["*.test.*", "setupTests.ts"],
-      "env": {
-        "browser": false,
-        "jest": true
-      },
-      "rules": {
-        "import/no-extraneous-dependencies": "off"
-      }
-    }
-  ],
   "globals": {
     "window": true
   }
